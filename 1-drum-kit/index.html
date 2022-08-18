@@ -60,10 +60,32 @@
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
   <script>
-    
 
+    const startSound = (e) => {
+      const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+      const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+
+      if (!audio) return; // it's stop running if we didn't get our expected the audio tag.
+      audio.currentTime = 0; // rewind to start
+      audio.play();
+      key.classList.add("playing");
+
+    }
+
+    // it works is remove the class playing if the css transition is end. 
+    function removeTransition (ele) {
+      if (ele.propertyName !== "transform") return; // skip it if is not a transform.
+      this.classList.remove("playing")
+    }
+
+    window.addEventListener("keydown", startSound);
+    
+    const keys = document.querySelectorAll(".key");
+    keys.forEach(e => e.addEventListener("transitionend", removeTransition));
+    
   </script>
 
 
 </body>
+
 </html>
