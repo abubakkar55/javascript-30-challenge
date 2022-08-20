@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>JS + CSS Clock</title>
+</head>
+
+<body>
+
+
+  <div class="clock">
+    <div class="clock-face">
+      <h1 class="hand hour-hand"></h1>
+      <h1 class="hand min-hand"></h1>
+      <h1 class="hand second-hand"> </h1>
+    </div>
+  </div>
+
+
+  <style>
+    html {
+      background: #018DED url(https://unsplash.it/1500/1000?image=881&blur=5);
+      background-size: cover;
+      font-family: 'helvetica neue';
+      text-align: center;
+      font-size: 10px;
+    }
+
+    body {
+      margin: 0;
+      font-size: 2rem;
+      display: flex;
+      flex: 1;
+      min-height: 100vh;
+      align-items: center;
+    }
+
+    .clock {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 45rem;
+      height: 15rem;
+      border: 15px solid white;
+      border-radius: 20px;
+      margin: 50px auto;
+      position: relative;
+      padding: 2rem;
+      box-shadow:
+        0 0 0 4px rgba(0, 0, 0, 0.1),
+        inset 0 0 0 3px #EFEFEF,
+        inset 0 0 10px black,
+        0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .clock-face {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .hand {
+      font-size: 7rem;
+      font-weight: bold;
+    }
+  </style>
+
+  <script>
+
+    const secondHand = document.querySelector(".second-hand");
+    const minHand = document.querySelector(".min-hand");
+    const hourHand = document.querySelector(".hour-hand");
+
+    function setDate() {
+      const now = new Date();
+      const hour = new Date().toLocaleTimeString().split(":")[0];
+      const minute = now.getMinutes() + 1; 
+      const seconds = now.getSeconds() + 1;
+
+      hourHand.innerHTML = `${hour} :`;
+      minHand.innerHTML = `${minute} :`
+      secondHand.innerHTML = seconds
+
+      console.log("~ seconds", seconds);
+    }
+
+    setInterval(setDate, 1000);
+
+  </script>
+</body>
+
+</html>
